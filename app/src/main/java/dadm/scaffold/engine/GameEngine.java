@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Rect;
 import android.util.Log;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.Random;
 
 import dadm.scaffold.ScaffoldActivity;
 import dadm.scaffold.counter.Communicator;
+import dadm.scaffold.counter.GameFragment;
 import dadm.scaffold.input.InputController;
 import dadm.scaffold.sound.GameEvent;
 import dadm.scaffold.sound.SoundManager;
@@ -42,10 +44,13 @@ public class GameEngine {
     public double pixelFactor;
 
     private Activity mainActivity;
+    private GameFragment game_layout=new GameFragment();
 
     public GameEngine(Activity activity, GameView gameView) {
         mainActivity = activity;
-
+        /*if (activity.getFragmentManager().findFragmentByTag("content").equals(GameFragment.class)) {
+            game_layout = (GameFragment) activity.getFragmentManager().findFragmentByTag("content");
+        }*/
         theGameView = gameView;
         theGameView.setGameObjects(this.gameObjects);
 
@@ -148,10 +153,7 @@ public class GameEngine {
 
                     }
                     if (objectToRemove instanceof Bullet){
-
-
                         Communicator.addHit();
-                        Log.d("HITS",String.valueOf(Communicator.getScore()) );
                     }
                 }
             }

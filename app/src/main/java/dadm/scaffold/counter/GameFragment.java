@@ -1,8 +1,6 @@
 package dadm.scaffold.counter;
 
 import android.app.Dialog;
-import android.content.DialogInterface;
-import android.app.AlertDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -20,13 +18,13 @@ import dadm.scaffold.engine.GameEngine;
 import dadm.scaffold.engine.GameView;
 import dadm.scaffold.input.JoystickInputController;
 import dadm.scaffold.space.GameController;
+import dadm.scaffold.space.GameUI;
 import dadm.scaffold.space.SpaceShipPlayer;
 
 
 public class GameFragment extends BaseFragment implements View.OnClickListener {
     private GameEngine theGameEngine;
     Dialog dialog;
-
     public GameFragment() {
     }
 
@@ -42,6 +40,7 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         view.findViewById(R.id.btn_play_pause).setOnClickListener(this);
+        // score_ingame.setText(String.valueOf(Communicator.getScore()));
         final ViewTreeObserver observer = view.getViewTreeObserver();
         observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener(){
             @Override
@@ -55,6 +54,7 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
                 theGameEngine.setTheInputController(new JoystickInputController(getView()));
                 theGameEngine.addGameObject(new SpaceShipPlayer(theGameEngine));
                 theGameEngine.addGameObject(new FramesPerSecondCounter(theGameEngine));
+                theGameEngine.addGameObject(new GameUI(theGameEngine));
                 theGameEngine.addGameObject(new GameController(theGameEngine));
                 theGameEngine.startGame();
             }
@@ -159,4 +159,6 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
             button.setText(R.string.resume);
         }
     }
+
+
 }

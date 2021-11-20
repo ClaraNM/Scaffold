@@ -5,6 +5,7 @@ import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import dadm.scaffold.counter.Communicator;
 import dadm.scaffold.counter.GameFragment;
@@ -88,4 +89,6 @@ public class ScaffoldActivity extends AppCompatActivity {
             }
         }
     }
+
+
 }

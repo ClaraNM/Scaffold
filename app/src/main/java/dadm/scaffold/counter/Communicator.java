@@ -1,8 +1,10 @@
 package dadm.scaffold.counter;
 
+import android.view.View;
+
 public class Communicator{
     private static int score=0;
-
+    private static int lifes=0;
     public static void addHit(){
         score++;
     }
@@ -12,6 +14,15 @@ public class Communicator{
     }
 
     public static int getScore() {
-        return score;
+        return score*25;
+    }
+
+    public static int getLifes() {
+        return lifes;
+    }
+    public static void looseLife(){ lifes--;}
+
+    public static void setLifes(int lifes) {
+        Communicator.lifes = lifes;
     }
 }
