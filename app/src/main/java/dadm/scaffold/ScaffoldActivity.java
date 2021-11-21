@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import dadm.scaffold.counter.Communicator;
+import dadm.scaffold.counter.ConfigFragment;
 import dadm.scaffold.counter.GameFragment;
 import dadm.scaffold.counter.MainMenuFragment;
 import dadm.scaffold.counter.ResultFragment;
@@ -16,7 +17,7 @@ import dadm.scaffold.sound.SoundManager;
 public class ScaffoldActivity extends AppCompatActivity {
 
     private static final String TAG_FRAGMENT = "content";
-
+int ship=R.drawable.player_ship_red;
     private SoundManager soundManager;
 
     @Override
@@ -46,6 +47,9 @@ public class ScaffoldActivity extends AppCompatActivity {
     }
     public void goResults(){
         navigateToFragment(new ResultFragment());
+    }
+    public void goConfig(){
+        navigateToFragment(new ConfigFragment());
     }
     private void navigateToFragment(BaseFragment dst) {
         getSupportFragmentManager()
@@ -90,5 +94,6 @@ public class ScaffoldActivity extends AppCompatActivity {
         }
     }
 
-
+public void setPlayerShip(int ship){this.ship = ship;}
+public int getPlayerShip(){return ship;}
 }

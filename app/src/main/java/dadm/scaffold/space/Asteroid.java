@@ -4,11 +4,12 @@ import dadm.scaffold.R;
 import dadm.scaffold.engine.GameEngine;
 import dadm.scaffold.engine.ScreenGameObject;
 import dadm.scaffold.engine.Sprite;
+import dadm.scaffold.sound.GameEvent;
 
 public class Asteroid extends Sprite {
 
     private final GameController gameController;
-
+    private int life=2;
     private double speed;
     private double speedX;
     private double speedY;
@@ -64,6 +65,13 @@ public class Asteroid extends Sprite {
 
     @Override
     public void onCollision(GameEngine gameEngine, ScreenGameObject otherObject) {
+        if (otherObject instanceof Bullet) {
+           life--;
+           this.updateSprite(gameEngine, R.drawable.meteor_tiny_damage);
+        }
+    }
 
+    public int getLife() {
+        return life;
     }
 }

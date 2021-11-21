@@ -7,13 +7,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import dadm.scaffold.BaseFragment;
 import dadm.scaffold.R;
 import dadm.scaffold.ScaffoldActivity;
 
 
-public class MainMenuFragment extends BaseFragment implements View.OnClickListener {
+public class MainMenuFragment extends BaseFragment {
+    Button start, config;
     public MainMenuFragment() {
     }
 
@@ -21,17 +23,32 @@ public class MainMenuFragment extends BaseFragment implements View.OnClickListen
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main_menu, container, false);
+        start=rootView.findViewById(R.id.btn_start);
+        config=rootView.findViewById(R.id.btn_config);
+        start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((ScaffoldActivity)getActivity()).startGame();
+            }
+        });
+        config.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((ScaffoldActivity)getActivity()).goConfig();
+            }
+        });
         return rootView;
     }
 
-    @Override
+   /* @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        view.findViewById(R.id.btn_start).setOnClickListener(this);
-    }
+     //   view.findViewById(R.id.btn_start).setOnClickListener(this);
+    }*/
 
-    @Override
+    /*@Override
     public void onClick(View v) {
         ((ScaffoldActivity)getActivity()).startGame();
     }
+    */
 }

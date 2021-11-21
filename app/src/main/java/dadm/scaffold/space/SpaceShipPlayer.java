@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dadm.scaffold.R;
+import dadm.scaffold.ScaffoldActivity;
 import dadm.scaffold.counter.Communicator;
 import dadm.scaffold.engine.GameEngine;
 import dadm.scaffold.engine.ScreenGameObject;
@@ -13,18 +14,19 @@ import dadm.scaffold.sound.GameEvent;
 
 public class SpaceShipPlayer extends Sprite {
 
-    private static final int INITIAL_BULLET_POOL_AMOUNT = 6;
-    private static final long TIME_BETWEEN_BULLETS = 250;
+    private static final int INITIAL_BULLET_POOL_AMOUNT = 12;
+    private static final long TIME_BETWEEN_BULLETS = 500;
     List<Bullet> bullets = new ArrayList<Bullet>();
     private long timeSinceLastFire;
-    private int lifes=3;
+    private final int MAX_LIFES=3;
+    private int lifes=MAX_LIFES;
     private int maxX;
     private int maxY;
     private double speedFactor;
 
 
-    public SpaceShipPlayer(GameEngine gameEngine){
-        super(gameEngine, R.drawable.player_ship);
+    public SpaceShipPlayer(GameEngine gameEngine, int ship_ID){
+        super(gameEngine, ship_ID);
         speedFactor = pixelFactor * 100d / 1000d; // We want to move at 100px per second on a 400px tall screen
         maxX = gameEngine.width - width;
         maxY = gameEngine.height - height;
@@ -81,13 +83,27 @@ public class SpaceShipPlayer extends Sprite {
     }
 
     private void checkFiring(long elapsedMillis, GameEngine gameEngine) {
-        if (gameEngine.theInputController.isFiring && timeSinceLastFire > TIME_BETWEEN_BULLETS) {
+        if (/*gameEngine.theInputController.isFiring && */timeSinceLastFire > TIME_BETWEEN_BULLETS) {
             Bullet bullet = getBullet();
             if (bullet == null) {
                 return;
             }
-            bullet.init(this, positionX + width/2, positionY);
+            bullet.init(this, positionX + width, positionY);
             gameEngine.addGameObject(bullet);
+            timeSinceLastFire = 0;
+            gameEngine.onGameEvent(GameEvent.LaserFired);
+        }
+        else if (gameEngine.theInputController.isFiring && timeSinceLastFire > (TIME_BETWEEN_BULLETS/2)){
+            Bullet bullet1 = getBullet();
+            Bullet bullet2 = getBullet();
+
+            if (bullet1 == null || bullet2==null) {
+                return;
+            }
+            bullet1.init(this, positionX + width/2, positionY);
+            bullet2.init(this, positionX +(width+width/2), positionY);
+            gameEngine.addGameObject(bullet1);
+            gameEngine.addGameObject(bullet2);
             timeSinceLastFire = 0;
             gameEngine.onGameEvent(GameEvent.LaserFired);
         }
@@ -110,6 +126,13 @@ public class SpaceShipPlayer extends Sprite {
             Asteroid a = (Asteroid) otherObject;
             a.removeObject(gameEngine);
             gameEngine.onGameEvent(GameEvent.SpaceshipHit);
+        }
+
+        if (otherObject instanceof Item_RestoreLife){
+            lifes=MAX_LIFES;
+            Item_RestoreLife i = (Item_RestoreLife) otherObject;
+            i.removeObject(gameEngine);
+
         }
     }
 }

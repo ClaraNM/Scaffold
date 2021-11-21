@@ -47,12 +47,17 @@ public class Bullet extends Sprite {
     @Override
     public void onCollision(GameEngine gameEngine, ScreenGameObject otherObject) {
         if (otherObject instanceof Asteroid) {
-            // Remove both from the game (and return them to their pools)
-            removeObject(gameEngine);
-            Asteroid a = (Asteroid) otherObject;
-            a.removeObject(gameEngine);
-            gameEngine.onGameEvent(GameEvent.AsteroidHit);
-            // Add some score
+            if (((Asteroid) otherObject).getLife()>0){
+                removeObject(gameEngine);
+                gameEngine.onGameEvent(GameEvent.AsteroidHit);
+            }else {
+                // Remove both from the game (and return them to their pools)
+                removeObject(gameEngine);
+                Asteroid a = (Asteroid) otherObject;
+                a.removeObject(gameEngine);
+                gameEngine.onGameEvent(GameEvent.AsteroidHit);
+                // Add some score
+            }
         }
     }
 }
