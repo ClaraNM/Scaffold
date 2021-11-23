@@ -66,8 +66,11 @@ public class Asteroid extends Sprite {
     @Override
     public void onCollision(GameEngine gameEngine, ScreenGameObject otherObject) {
         if (otherObject instanceof Bullet) {
-           life--;
+           life=life-((Bullet) otherObject).getDAMAGE();
            this.updateSprite(gameEngine, R.drawable.meteor_tiny_damage);
+        }
+        if (otherObject instanceof BigBullet) {
+            life=life-((BigBullet) otherObject).getDAMAGE();
         }
     }
 

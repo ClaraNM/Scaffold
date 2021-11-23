@@ -152,9 +152,6 @@ public class GameEngine {
                         ((ScaffoldActivity)mainActivity).goResults();
 
                     }
-                    if (objectToRemove instanceof Bullet){
-                        Communicator.addHit();
-                    }
                 }
             }
             while (!objectsToAdd.isEmpty()) {

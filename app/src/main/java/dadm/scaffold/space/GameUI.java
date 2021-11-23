@@ -18,9 +18,11 @@ private int maxX;
 private int maxY;
     private Paint paint_S;
     private Paint paint_L;
+    private Paint paint_A;
     private long totalMillis;
 private String score="";
 private String lifes="";
+private String ammo="";
 
 public GameUI(GameEngine gameEngine){
     paint_S = new Paint();
@@ -34,6 +36,10 @@ public GameUI(GameEngine gameEngine){
     textHeight_L = (float) (75 * gameEngine.pixelFactor);
     textWidth_L = (float) (125 * gameEngine.pixelFactor);
     paint_L.setTextSize(textHeight_L / 2);
+
+    paint_A = new Paint();
+    paint_A.setTextAlign(Paint.Align.CENTER);
+    paint_A.setTextSize(textHeight_L / 2);
 
 
     maxX = gameEngine.width;
@@ -51,6 +57,8 @@ public GameUI(GameEngine gameEngine){
         if (totalMillis > 200) {
             score =String.valueOf(Communicator.getScore());
             lifes =String.valueOf(Communicator.getLifes());
+            ammo =String.valueOf(Communicator.getAmmo());
+
             totalMillis = 0;
         }
     }
@@ -64,5 +72,8 @@ public GameUI(GameEngine gameEngine){
 
         paint_L.setColor(Color.RED);
         canvas.drawText(lifes, (maxX /7), (maxY-50), paint_L);
+
+        paint_A.setColor(Color.RED);
+        canvas.drawText(ammo, (maxX -50), (maxY-50), paint_L);
     }
 }
