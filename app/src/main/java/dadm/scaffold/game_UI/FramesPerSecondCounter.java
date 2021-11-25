@@ -1,8 +1,11 @@
-package dadm.scaffold.engine;
+package dadm.scaffold.game_UI;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+
+import dadm.scaffold.engine.GameEngine;
+import dadm.scaffold.engine.GameObject;
 
 public class FramesPerSecondCounter extends GameObject {
 

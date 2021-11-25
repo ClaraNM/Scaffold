@@ -35,7 +35,6 @@ private double speed;
     public int getLifes() { return lifes; }
 
     public int getPoints() { return points; }
-    public void setPoints(int points) { this.points = points; }
     public double getSpeed() { return speed; }
     public void setSpeed(double speed) { this.speed = speed; }
     public long getTimeSinceLastFire() { return timeSinceLastFire; }

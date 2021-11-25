@@ -13,13 +13,15 @@ import android.widget.Button;
 import dadm.scaffold.BaseFragment;
 import dadm.scaffold.R;
 import dadm.scaffold.ScaffoldActivity;
-import dadm.scaffold.engine.FramesPerSecondCounter;
 import dadm.scaffold.engine.GameEngine;
 import dadm.scaffold.engine.GameView;
 import dadm.scaffold.engine.ParalaxBackground;
+import dadm.scaffold.game_UI.AmmoTab;
+import dadm.scaffold.game_UI.ScoreTab;
 import dadm.scaffold.input.JoystickInputController;
 import dadm.scaffold.space.GameController;
-import dadm.scaffold.space.GameUI;
+import dadm.scaffold.game_UI.GameUI;
+import dadm.scaffold.game_UI.PlayerLife;
 import dadm.scaffold.space.SpaceShipPlayer;
 
 
@@ -58,7 +60,10 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
                 theGameEngine.addGameObject(new ParalaxBackground(theGameEngine, R.drawable.purple_bg,1));
 
                 theGameEngine.addGameObject(new SpaceShipPlayer(theGameEngine,((ScaffoldActivity)getActivity()).getPlayerShip()));
-                theGameEngine.addGameObject(new FramesPerSecondCounter(theGameEngine));
+               // theGameEngine.addGameObject(new FramesPerSecondCounter(theGameEngine));
+                theGameEngine.addGameObject(new PlayerLife(theGameEngine));
+                theGameEngine.addGameObject(new ScoreTab(theGameEngine));
+                theGameEngine.addGameObject(new AmmoTab(theGameEngine));
                 theGameEngine.addGameObject(new GameUI(theGameEngine));
                 theGameEngine.addGameObject(new GameController(theGameEngine));
                 theGameEngine.startGame();

@@ -24,15 +24,6 @@
         android:paddingHorizontal="10dp"
         android:text="@string/pause" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Vidas:"
-        android:layout_gravity="bottom|left"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_marginLeft="@dimen/activity_vertical_margin"
-        android:textSize="25dp"
-        />
 
 
     <include layout="@layout/view_joystick" />

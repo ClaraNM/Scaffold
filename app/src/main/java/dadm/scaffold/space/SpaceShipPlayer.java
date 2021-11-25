@@ -3,7 +3,6 @@ package dadm.scaffold.space;
 import java.util.ArrayList;
 import java.util.List;
 
-import dadm.scaffold.R;
 import dadm.scaffold.counter.Communicator;
 import dadm.scaffold.engine.GameEngine;
 import dadm.scaffold.engine.ScreenGameObject;
@@ -164,7 +163,8 @@ public class SpaceShipPlayer extends Sprite {
 
     public void checkShieldTime(long elapsedMillis, GameEngine gameEngine){
         if (timeSinceLastShield > MAX_TIME_ON_SHIELD){
-    timeSinceLastShield=0;
+            gameEngine.onGameEvent(GameEvent.ShieldDown);
+            timeSinceLastShield=0;
     protection=false;
         }
         timeSinceLastShield += elapsedMillis;
@@ -192,7 +192,7 @@ public int getShipWidth(){
             if (protection==false){
                 if (lifes>1){
                   lifes--;
-                    Communicator.looseLife();
+                    Communicator.loseLife();
                 }else {
                    gameEngine.removeGameObject(this);
                 }
@@ -226,24 +226,32 @@ public int getShipWidth(){
             i.removeObject(gameEngine);
             Shield shield=new Shield(gameEngine, this);
             gameEngine.addGameObject(shield);
-
+            gameEngine.onGameEvent(GameEvent.ShieldUp);
         }
         //Colision con nave enemiga
         if(otherObject instanceof  Enemy){
-            lifes=0;
-            Enemy e= (Enemy) otherObject;
-            e.removeObject(gameEngine);
-            gameEngine.removeGameObject(this);
+            if (protection==false) {
+                lifes = 0;
+                Enemy e = (Enemy) otherObject;
+                e.removeObject(gameEngine);
+                gameEngine.removeGameObject(this);
+            }else{
+                Enemy e = (Enemy) otherObject;
+                e.removeObject(gameEngine);
+            }
         }
         //Colision con bala enemiga
         if (otherObject instanceof EnemyBullet) {
+            if (protection==false){
             if (lifes>1){
                 lifes=lifes-((EnemyBullet) otherObject).getDAMAGE();
-                Communicator.looseLife();
+                Communicator.loseLife();
             }else {
+                gameEngine.onGameEvent(GameEvent.Lose);
                 gameEngine.removeGameObject(this);
             }
 
+        }
         }
     }
 }

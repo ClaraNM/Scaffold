@@ -21,7 +21,7 @@ public class Communicator{
     public static int getLifes() {
         return lifes;
     }
-    public static void looseLife(){ lifes--;}
+    public static void loseLife(){ lifes--;}
 
     public static void setLifes(int lifes) {
         Communicator.lifes = lifes;
