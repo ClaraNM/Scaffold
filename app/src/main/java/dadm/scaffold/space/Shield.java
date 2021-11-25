@@ -7,43 +7,43 @@ import dadm.scaffold.engine.Sprite;
 import dadm.scaffold.input.InputController;
 
 public class Shield extends Sprite {
-    private double speedFactor;
-    private int maxX;
-    private int maxY;
 
-    public Shield(GameEngine gameEngine) {
+    private static final long MAX_TIME_ON_SHIELD = 15000;
+    private long timeSinceLastShield;
+    private double []shield_position;
+    SpaceShipPlayer shipPlayer;
+
+
+    public Shield(GameEngine gameEngine, SpaceShipPlayer player) {
         super(gameEngine, R.drawable.shield);
-        speedFactor = pixelFactor * 100d / 1000d; // We want to move at 100px per second on a 400px tall screen
-        maxX = gameEngine.width - width;
-        maxY = gameEngine.height - height;
+        this.shipPlayer=player;
     }
 
     @Override
     public void startGame() {
-        positionX = maxX / 2;
-        positionY = maxY / 2;
+        shield_position=shipPlayer.getShipPosition();
+        positionX=shield_position[0]-(shipPlayer.getShipWidth()/2);
+        positionY=shield_position[1]-(shipPlayer.getShipHeight()/2);
     }
 
     @Override
     public void onUpdate(long elapsedMillis, GameEngine gameEngine) {
-        updatePosition(elapsedMillis, gameEngine.theInputController);
+        updatePosition();
+        checkShieldTime(elapsedMillis, gameEngine);
+    }
+    private void updatePosition() {
+        shield_position=shipPlayer.getShipPosition();
+        positionX=shield_position[0]-(shipPlayer.getShipWidth()/2);
+        positionY=shield_position[1]-(shipPlayer.getShipHeight()/2);
 
     }
-    private void updatePosition(long elapsedMillis, InputController inputController) {
-        positionX += speedFactor * inputController.horizontalFactor * elapsedMillis;
-        if (positionX < 0) {
-            positionX = 0;
+    public void checkShieldTime(long elapsedMillis, GameEngine gameEngine){
+        if (timeSinceLastShield > MAX_TIME_ON_SHIELD){
+            timeSinceLastShield=0;
+            gameEngine.removeGameObject(this);
         }
-        if (positionX > maxX) {
-            positionX = maxX;
-        }
-        positionY += speedFactor * inputController.verticalFactor * elapsedMillis;
-        if (positionY < 0) {
-            positionY = 0;
-        }
-        if (positionY > maxY) {
-            positionY = maxY;
-        }
+        timeSinceLastShield += elapsedMillis;
+
     }
     @Override
     public void onCollision(GameEngine gameEngine, ScreenGameObject otherObject) {

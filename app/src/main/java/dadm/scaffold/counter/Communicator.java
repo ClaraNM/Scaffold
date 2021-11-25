@@ -6,8 +6,8 @@ public class Communicator{
     private static int lifes=0;
     private static int ammo=0;
 
-    public static void addHit(){
-        score++;
+    public static void addHit(int points){
+        score=score+points;
     }
 
     public static void setScore(int newScore) {
@@ -15,7 +15,7 @@ public class Communicator{
     }
 
     public static int getScore() {
-        return score*25;
+        return score;
     }
 
     public static int getLifes() {

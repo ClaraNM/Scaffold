@@ -7,21 +7,23 @@ import dadm.scaffold.engine.ScreenGameObject;
 import dadm.scaffold.engine.Sprite;
 import dadm.scaffold.sound.GameEvent;
 
-public class Bullet extends Sprite {
+public class EnemyBullet extends Sprite {
 
     private final int DAMAGE=1;
     private double speedFactor;
+    private Enemy parent;
 
-    private SpaceShipPlayer parent;
 
-    public Bullet(GameEngine gameEngine){
-        super(gameEngine, R.drawable.player_laser);
+    public EnemyBullet(GameEngine gameEngine) {
+        super(gameEngine, R.drawable.enemy_laser);
+        speedFactor = gameEngine.pixelFactor * 100d / 1000d;
 
-        speedFactor = gameEngine.pixelFactor * -300d / 1000d;
     }
 
     @Override
-    public void startGame() {}
+    public void startGame() {
+
+    }
 
     @Override
     public void onUpdate(long elapsedMillis, GameEngine gameEngine) {
@@ -32,12 +34,10 @@ public class Bullet extends Sprite {
             parent.releaseBullet(this);
         }
     }
-
-
-    public void init(SpaceShipPlayer parentPlayer, double initPositionX, double initPositionY) {
+    public void init(Enemy parentEnemy, double initPositionX, double initPositionY) {
         positionX = initPositionX - width/2;
         positionY = initPositionY - height/2;
-        parent = parentPlayer;
+        parent = parentEnemy;
     }
 
     private void removeObject(GameEngine gameEngine) {
@@ -49,41 +49,18 @@ public class Bullet extends Sprite {
     public int getDAMAGE() {
         return DAMAGE;
     }
-
     @Override
     public void onCollision(GameEngine gameEngine, ScreenGameObject otherObject) {
-        if (otherObject instanceof Asteroid) {
-            if (((Asteroid) otherObject).getLife()>0){
+        if (otherObject instanceof SpaceShipPlayer) {
+            if (((SpaceShipPlayer) otherObject).getLifes()>0){
                 removeObject(gameEngine);
                 gameEngine.onGameEvent(GameEvent.AsteroidHit);
             }else {
                 // Remove both from the game (and return them to their pools)
                 removeObject(gameEngine);
-                Asteroid a = (Asteroid) otherObject;
-                // Add some score
-                Communicator.addHit(a.points);
-
-                a.removeObject(gameEngine);
+                SpaceShipPlayer a = (SpaceShipPlayer) otherObject;
+                gameEngine.removeGameObject(a);
                 gameEngine.onGameEvent(GameEvent.AsteroidHit);
-
-
-            }
-        }
-        if(otherObject instanceof Enemy){
-            if (((Enemy) otherObject).getLifes()>0){
-                removeObject(gameEngine);
-                gameEngine.onGameEvent(GameEvent.AsteroidHit);
-            }else {
-                // Remove both from the game (and return them to their pools)
-                removeObject(gameEngine);
-                Enemy e = (Enemy) otherObject;
-                // Add some score
-                Communicator.addHit(e.getPoints());
-
-                e.removeObject(gameEngine);
-                gameEngine.onGameEvent(GameEvent.AsteroidHit);
-
-
             }
         }
     }

@@ -3,6 +3,7 @@ package dadm.scaffold.space;
 import java.util.ArrayList;
 import java.util.List;
 
+import dadm.scaffold.R;
 import dadm.scaffold.counter.Communicator;
 import dadm.scaffold.engine.GameEngine;
 import dadm.scaffold.engine.ScreenGameObject;
@@ -19,7 +20,7 @@ public class SpaceShipPlayer extends Sprite {
     private static final int INITIAL_BULLET_POOL_AMOUNT = 12;
     private static final int MAX_BIG_BULLET_AMMO = 6;
     private static final long TIME_BETWEEN_BULLETS = 500;
-    private static final long MAX_TIME_ON_SHIELD = 30000;
+    private static final long MAX_TIME_ON_SHIELD = 15000;
     List<Bullet> bullets = new ArrayList<Bullet>();
     List<BigBullet> big_bullets= new ArrayList<BigBullet>();
     private long timeSinceLastFire;
@@ -123,7 +124,7 @@ public class SpaceShipPlayer extends Sprite {
                 if (bullet == null) {
                     return;
                 }
-                bullet.init(this, positionX + width, positionY);
+                bullet.init(this, positionX + width/2, positionY);
                 gameEngine.addGameObject(bullet);
             }else{
                 Bullet bullet1 = getBullet();
@@ -132,8 +133,8 @@ public class SpaceShipPlayer extends Sprite {
                 if (bullet1 == null || bullet2 == null) {
                     return;
                 }
-                bullet1.init(this, positionX + width/2, positionY);
-                bullet2.init(this, positionX +(width+width/2), positionY);
+                bullet1.init(this, positionX , positionY);
+                bullet2.init(this, positionX +width, positionY);
                 gameEngine.addGameObject(bullet1);
                 gameEngine.addGameObject(bullet2);
 
@@ -162,13 +163,28 @@ public class SpaceShipPlayer extends Sprite {
     }
 
     public void checkShieldTime(long elapsedMillis, GameEngine gameEngine){
-        if (timeSinceLastFire > MAX_TIME_ON_SHIELD){
+        if (timeSinceLastShield > MAX_TIME_ON_SHIELD){
     timeSinceLastShield=0;
     protection=false;
         }
         timeSinceLastShield += elapsedMillis;
 
     }
+
+    public double [] getShipPosition(){
+        double[] ship_position= new double[2];
+        ship_position[0]=positionX;
+        ship_position[1]=positionY;
+        return ship_position;
+    }
+public int getShipWidth(){
+        return this.width;
+}
+    public int getShipHeight(){
+        return this.height;
+    }
+    public int getLifes(){return lifes;}
+
     @Override
     public void onCollision(GameEngine gameEngine, ScreenGameObject otherObject) {
         //Colision con asteriode
@@ -208,8 +224,25 @@ public class SpaceShipPlayer extends Sprite {
             protection=true;
             Item_Protection i = (Item_Protection) otherObject;
             i.removeObject(gameEngine);
-            Shield shield=new Shield(gameEngine);
+            Shield shield=new Shield(gameEngine, this);
             gameEngine.addGameObject(shield);
+
+        }
+        //Colision con nave enemiga
+        if(otherObject instanceof  Enemy){
+            lifes=0;
+            Enemy e= (Enemy) otherObject;
+            e.removeObject(gameEngine);
+            gameEngine.removeGameObject(this);
+        }
+        //Colision con bala enemiga
+        if (otherObject instanceof EnemyBullet) {
+            if (lifes>1){
+                lifes=lifes-((EnemyBullet) otherObject).getDAMAGE();
+                Communicator.looseLife();
+            }else {
+                gameEngine.removeGameObject(this);
+            }
 
         }
     }

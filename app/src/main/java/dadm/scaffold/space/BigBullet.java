@@ -57,10 +57,28 @@ public class BigBullet extends Sprite {
             }else {
                 // Remove both from the game (and return them to their pools)
                 Asteroid a = (Asteroid) otherObject;
+                // Add some score
+                Communicator.addHit(a.points);
+
                 a.removeObject(gameEngine);
                 gameEngine.onGameEvent(GameEvent.AsteroidHit);
+            }
+        }
+        if(otherObject instanceof Enemy){
+            if (((Enemy) otherObject).getLifes()>0){
+                removeObject(gameEngine);
+                gameEngine.onGameEvent(GameEvent.AsteroidHit);
+            }else {
+                // Remove both from the game (and return them to their pools)
+                removeObject(gameEngine);
+                Enemy e = (Enemy) otherObject;
                 // Add some score
-                Communicator.addHit();
+                Communicator.addHit(e.getPoints());
+
+                e.removeObject(gameEngine);
+                gameEngine.onGameEvent(GameEvent.AsteroidHit);
+
+
             }
         }
     }

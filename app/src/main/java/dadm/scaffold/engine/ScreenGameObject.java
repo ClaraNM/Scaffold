@@ -1,5 +1,6 @@
 package dadm.scaffold.engine;
 
+import android.graphics.Canvas;
 import android.graphics.Rect;
 
 public abstract class ScreenGameObject extends GameObject {
@@ -25,7 +26,9 @@ public abstract class ScreenGameObject extends GameObject {
     }
 
     public boolean checkCollision(ScreenGameObject otherObject) {
-         return checkCircularCollision(otherObject);
+        return checkCircularCollision(otherObject);
+        //return checkRectangularCollision(otherObject);
+
     }
 
     private boolean checkCircularCollision(ScreenGameObject other) {
@@ -35,5 +38,9 @@ public abstract class ScreenGameObject extends GameObject {
         double collisionDistance = (radius + other.radius);
         return squareDistance <= collisionDistance*collisionDistance;
     }
+    private boolean checkRectangularCollision(ScreenGameObject other) {
+        return Rect.intersects(mBoundingRect, other.mBoundingRect);
+    }
+
 
 }

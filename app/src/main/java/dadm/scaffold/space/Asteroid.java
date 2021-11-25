@@ -14,6 +14,7 @@ public class Asteroid extends Sprite {
     private double speedX;
     private double speedY;
     private double rotationSpeed;
+    int points=20;
 
     public Asteroid(GameController gameController, GameEngine gameEngine) {
         super(gameEngine, R.drawable.meteor_tiny);

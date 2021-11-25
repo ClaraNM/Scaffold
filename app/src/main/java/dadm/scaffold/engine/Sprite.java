@@ -3,12 +3,17 @@ package dadm.scaffold.engine;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
+
+
 public abstract class Sprite extends ScreenGameObject {
 
+    Paint mPaint;
     protected double rotation;
 
     protected double pixelFactor;
@@ -20,15 +25,15 @@ public abstract class Sprite extends ScreenGameObject {
     protected Sprite (GameEngine gameEngine, int drawableRes) {
         Resources r = gameEngine.getContext().getResources();
         Drawable spriteDrawable = r.getDrawable(drawableRes);
-
+        this.mPaint=new Paint();
         this.pixelFactor = gameEngine.pixelFactor;
 
-        this.width = (int) (spriteDrawable.getIntrinsicHeight() * this.pixelFactor);
-        this.height = (int) (spriteDrawable.getIntrinsicWidth() * this.pixelFactor);
+        this.width = (int) (spriteDrawable.getIntrinsicWidth() * this.pixelFactor);
+        this.height = (int) (spriteDrawable.getIntrinsicHeight() * this.pixelFactor);
 
         this.bitmap = ((BitmapDrawable) spriteDrawable).getBitmap();
 
-        radius = Math.max(height, width)/2;
+        radius = Math.min(height, width)/2;
     }
 
     @Override
@@ -39,6 +44,15 @@ public abstract class Sprite extends ScreenGameObject {
                 || positionY < - height) {
             return;
         }
+
+        //Pintar colisiones
+        mPaint.setColor(Color.YELLOW);
+        mPaint.setAlpha(50);
+        canvas.drawCircle(
+                (int) (positionX + width / 2),
+                (int) (positionY + height / 2),
+                (int) radius,
+                mPaint);
         matrix.reset();
         matrix.postScale((float) pixelFactor, (float) pixelFactor);
         matrix.postTranslate((float) positionX, (float) positionY);
@@ -52,11 +66,11 @@ public abstract class Sprite extends ScreenGameObject {
 
         this.pixelFactor = gameEngine.pixelFactor;
 
-        this.width = (int) (spriteDrawable.getIntrinsicHeight() * this.pixelFactor);
-        this.height = (int) (spriteDrawable.getIntrinsicWidth() * this.pixelFactor);
+        this.width = (int) (spriteDrawable.getIntrinsicWidth() * this.pixelFactor);
+        this.height = (int) (spriteDrawable.getIntrinsicHeight() * this.pixelFactor);
 
         this.bitmap = ((BitmapDrawable) spriteDrawable).getBitmap();
 
-        radius = Math.max(height, width)/2;
+        radius = Math.min(height, width)/2;
     }
 }
