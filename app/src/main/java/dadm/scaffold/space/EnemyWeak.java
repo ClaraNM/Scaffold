@@ -41,7 +41,7 @@ public class EnemyWeak extends Enemy{
     public void init(GameEngine gameEngine) {
         // They initialize in a [-30, 30] degrees angle
         double angle = gameEngine.random.nextDouble()*Math.PI/3d-Math.PI/6d;
-        speedX = this.getSpeed() * Math.sin(angle);
+        speedX = this.getSpeed()*3 * Math.sin(angle);
         speedY = this.getSpeed() * Math.cos(angle);
         positionX = gameEngine.random.nextInt(gameEngine.width/2)+gameEngine.width/4;
         // They initialize outside of the screen vertically

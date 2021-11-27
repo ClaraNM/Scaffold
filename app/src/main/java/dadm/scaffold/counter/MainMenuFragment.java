@@ -15,7 +15,7 @@ import dadm.scaffold.ScaffoldActivity;
 
 
 public class MainMenuFragment extends BaseFragment {
-    Button start, config;
+    Button start, config, exit;
     public MainMenuFragment() {
     }
 
@@ -25,6 +25,7 @@ public class MainMenuFragment extends BaseFragment {
         View rootView = inflater.inflate(R.layout.fragment_main_menu, container, false);
         start=rootView.findViewById(R.id.btn_start);
         config=rootView.findViewById(R.id.btn_config);
+        exit=rootView.findViewById(R.id.btn_exit_main);
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -35,6 +36,13 @@ public class MainMenuFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 ((ScaffoldActivity)getActivity()).goConfig();
+            }
+        });
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((ScaffoldActivity)getActivity()).finish();
+                System.exit(0);
             }
         });
         return rootView;

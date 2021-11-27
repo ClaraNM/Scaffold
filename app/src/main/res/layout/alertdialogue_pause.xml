@@ -15,6 +15,8 @@
     android:gravity="center"
     android:layout_marginTop="10dp"
     android:text="PAUSE"
+    android:textColor="@color/yellow_border"
+    android:fontFamily="@font/kenvector_future"
     android:textSize="50dp"/>
 <RelativeLayout
     android:layout_width="match_parent"
@@ -28,8 +30,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_marginRight="20dp"
-        android:background="@drawable/button_blue"
-        android:text="Continuar" />
+        android:background="@drawable/button_green"
+        android:fontFamily="@font/kenvector_future_thin"
+        android:paddingHorizontal="20dp"
+        android:text="Continuar"
+        android:textSize="25dp" />
 
     <Button
         android:id="@+id/pause_stop"
@@ -38,6 +43,9 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="20dp"
         android:background="@drawable/button_red"
+        android:fontFamily="@font/kenvector_future_thin"
+        android:paddingHorizontal="20dp"
+        android:textSize="25dp"
         android:text="Salir" />
 </RelativeLayout>
 </LinearLayout>

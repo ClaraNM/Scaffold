@@ -56,8 +56,8 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
                 theGameEngine.setSoundManager(getScaffoldActivity().getSoundManager());
                 theGameEngine.setTheInputController(new JoystickInputController(getView()));
 
-                theGameEngine.addGameObject(new ParalaxBackground(theGameEngine, R.drawable.purple_bg,0));
-                theGameEngine.addGameObject(new ParalaxBackground(theGameEngine, R.drawable.purple_bg,1));
+                theGameEngine.addGameObject(new ParalaxBackground(theGameEngine, R.drawable.parallax_bg,0));
+                theGameEngine.addGameObject(new ParalaxBackground(theGameEngine, R.drawable.parallax_bg,1));
 
                 theGameEngine.addGameObject(new SpaceShipPlayer(theGameEngine,((ScaffoldActivity)getActivity()).getPlayerShip()));
                // theGameEngine.addGameObject(new FramesPerSecondCounter(theGameEngine));

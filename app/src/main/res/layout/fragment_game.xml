@@ -20,8 +20,10 @@
         android:layout_gravity="top|right"
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:layout_marginRight="@dimen/activity_vertical_margin"
-        android:background="@drawable/button_blue"
-        android:paddingHorizontal="10dp"
+        android:background="@drawable/button_pause"
+        android:paddingHorizontal="20dp"
+        android:textSize="20dp"
+        android:fontFamily="@font/kenvector_future_thin"
         android:text="@string/pause" />
 
 

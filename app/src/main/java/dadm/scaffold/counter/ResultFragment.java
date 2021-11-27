@@ -15,7 +15,7 @@ import dadm.scaffold.ScaffoldActivity;
 
 public class ResultFragment extends BaseFragment {
     Button play_again,go_start,exit;
-    TextView score;
+    TextView score, meteors, e_w, e_m,e_p;
 
     @Nullable
     @Override
@@ -27,6 +27,14 @@ public class ResultFragment extends BaseFragment {
         exit=rootView.findViewById(R.id.result_exit);
         score=rootView.findViewById(R.id.result_score);
         score.setText(String.valueOf(Communicator.getScore()));
+        e_w=rootView.findViewById(R.id.result_enemies_weak_data);
+        e_w.setText(String.valueOf(Communicator.getE_weak()));
+        e_m=rootView.findViewById(R.id.result_enemies_mid_data);
+        e_m.setText(String.valueOf(Communicator.getE_mid()));
+        e_p=rootView.findViewById(R.id.result_enemies_pro_data);
+        e_p.setText(String.valueOf(Communicator.getE_pro()));
+        meteors=rootView.findViewById(R.id.result_enemies_pro_data);
+        meteors.setText(String.valueOf(Communicator.getMeteors()));
 
         play_again.setOnClickListener(new View.OnClickListener() {
             @Override

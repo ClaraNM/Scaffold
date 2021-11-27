@@ -25,6 +25,9 @@ public class PlayerLife extends Sprite {
 
     @Override
     public void onUpdate(long elapsedMillis, GameEngine gameEngine) {
+        if(Communicator.getLifes()==3){
+            this.updateSprite(gameEngine, R.drawable.player_life_full);
+        }
         if (Communicator.getLifes()==2){
             this.updateSprite(gameEngine, R.drawable.player_life_mid);
         }

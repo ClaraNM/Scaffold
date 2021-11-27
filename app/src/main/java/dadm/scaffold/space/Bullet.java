@@ -62,7 +62,7 @@ public class Bullet extends Sprite {
                 Asteroid a = (Asteroid) otherObject;
                 // Add some score
                 Communicator.addHit(a.points);
-
+                Communicator.addMeteors();
                 a.removeObject(gameEngine);
                 gameEngine.onGameEvent(GameEvent.AsteroidHit);
 
@@ -79,7 +79,9 @@ public class Bullet extends Sprite {
                 Enemy e = (Enemy) otherObject;
                 // Add some score
                 Communicator.addHit(e.getPoints());
-
+                if (e instanceof EnemyWeak){Communicator.addE_weak();}
+                if (e instanceof EnemyMid){Communicator.addE_mid();}
+                if (e instanceof EnemyHard){Communicator.addE_pro();}
                 e.removeObject(gameEngine);
                 gameEngine.onGameEvent(GameEvent.AsteroidHit);
 

@@ -150,7 +150,7 @@ public class SpaceShipPlayer extends Sprite {
                 return;
             }
 
-            big_bullet.init(this, positionX + width, positionY);
+            big_bullet.init(this, positionX + width/2, positionY);
 
             gameEngine.addGameObject(big_bullet);
             timeSinceLastFire = 0;
@@ -210,6 +210,7 @@ public int getShipWidth(){
  //Colision con recuperar municion
     if (otherObject instanceof Item_RestoreAmmo){
         ammo=MAX_BIG_BULLET_AMMO;
+        Communicator.setAmmo(MAX_BIG_BULLET_AMMO);
         Item_RestoreAmmo i = (Item_RestoreAmmo) otherObject;
         i.removeObject(gameEngine);
     }

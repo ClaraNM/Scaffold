@@ -5,14 +5,13 @@
     android:background="@drawable/purple_bg"
     >
 
-    <TextView
-        android:layout_gravity="center_horizontal|top"
-        style="@android:style/TextAppearance.DeviceDefault.Large"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:text="@string/game_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
+<ImageView
+    android:layout_gravity="center_horizontal|top"
+    style="@android:style/TextAppearance.DeviceDefault.Large"
+    android:layout_marginTop="30dp"
+    android:src="@drawable/title"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
     <Button
         android:id="@+id/btn_start"
         android:layout_width="wrap_content"
@@ -21,6 +20,8 @@
         android:paddingHorizontal="10dp"
         android:layout_marginBottom="30dp"
         android:background="@drawable/button_blue"
+        android:textSize="20dp"
+        android:fontFamily="@font/kenvector_future_thin"
         android:text="@string/start" />
     <Button
         android:id="@+id/btn_config"
@@ -30,6 +31,19 @@
         android:layout_marginTop="30dp"
         android:paddingHorizontal="10dp"
         android:background="@drawable/button_blue"
+        android:textSize="20dp"
+        android:fontFamily="@font/kenvector_future_thin"
         android:text="Configuración" />
+    <Button
+        android:id="@+id/btn_exit_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="90dp"
+        android:paddingHorizontal="10dp"
+        android:background="@drawable/button_blue"
+        android:textSize="20dp"
+        android:fontFamily="@font/kenvector_future_thin"
+        android:text="SALIR" />
 
 </FrameLayout>

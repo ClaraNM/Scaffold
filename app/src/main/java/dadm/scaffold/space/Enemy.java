@@ -14,7 +14,7 @@ private double speed;
     private final GameController gameController;
 
     public static final int INITIAL_BULLET_POOL_AMOUNT = 12;
-    public static final long TIME_BETWEEN_BULLETS = 800;
+    public static final long TIME_BETWEEN_BULLETS = 1000;
     List<EnemyBullet> bullets = new ArrayList<EnemyBullet>();
     private long timeSinceLastFire;
 

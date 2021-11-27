@@ -54,7 +54,6 @@ public GameUI(GameEngine gameEngine){
         if (totalMillis > 200) {
             score =String.valueOf(Communicator.getScore());
             ammo =String.valueOf(Communicator.getAmmo());
-
             totalMillis = 0;
         }
     }
@@ -62,7 +61,7 @@ public GameUI(GameEngine gameEngine){
     @Override
     public void onDraw(Canvas canvas) {
         paint_S.setColor(Color.WHITE);
-        canvas.drawText(score, (maxX-(maxX-50)), (maxY-(maxY-25)), paint_S);
+        canvas.drawText(score, (maxX-(maxX-200)), (maxY-(maxY-150)), paint_S);
 
         paint_A.setColor(Color.WHITE);
         canvas.drawText(ammo, (maxX -300), (maxY-100), paint_A);

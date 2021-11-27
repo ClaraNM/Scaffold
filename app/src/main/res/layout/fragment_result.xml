@@ -8,31 +8,151 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_marginTop="30dp"
+    android:layout_marginTop="10dp"
     >
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="RESULTADO"
-        android:textSize="40dp"
-        />
-    <TextView
-        android:id="@+id/result_score"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:textSize="30dp"
-        android:text="PlaceHolder"
-        />
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="RESULTADO"
+            android:textColor="@color/yellow_border"
+            android:fontFamily="@font/kenvector_future"
+            android:paddingHorizontal="20dp"
+            android:textSize="40dp"
+            />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/result_box"
+            android:layout_marginHorizontal="150dp"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/result_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/kenvector_future_thin"
+                android:paddingHorizontal="25dp"
+                android:text="PlaceHolder"
+
+                android:textColor="@color/white"
+                android:textSize="30dp" />
+
+
+            <TextView
+                android:id="@+id/result_meteors"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/result_score"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/kenvector_future_thin"
+                android:text="Nº Meteoritos:"
+                android:textColor="@color/white"
+                android:textSize="15dp" />
+            <TextView
+                android:id="@+id/result_meteors_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/result_score"
+                android:layout_toRightOf="@+id/result_meteors"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/kenvector_future_thin"
+                android:text="5"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/white"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/result_enemies_weak"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/result_meteors"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/kenvector_future_thin"
+                android:text="Nº Enemigos T1:"
+                android:textColor="@color/white"
+                android:textSize="15dp" />
+            <TextView
+                android:id="@+id/result_enemies_weak_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/result_meteors"
+                android:layout_toRightOf="@+id/result_enemies_weak"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/kenvector_future_thin"
+                android:text="5"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/white"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/result_enemies_mid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/result_enemies_weak"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/kenvector_future_thin"
+                android:text="Nº Enemigos T2:"
+                android:textColor="@color/white"
+                android:textSize="15dp" />
+            <TextView
+                android:id="@+id/result_enemies_mid_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/result_enemies_weak"
+                android:layout_toRightOf="@+id/result_enemies_mid"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/kenvector_future_thin"
+                android:text="5"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/white"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/result_enemies_pro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/kenvector_future_thin"
+                android:layout_below="@+id/result_enemies_mid"
+                android:text="Nº Enemigos T3:"
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                />
+            <TextView
+                android:id="@+id/result_enemies_pro_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/result_enemies_mid"
+                android:layout_toRightOf="@+id/result_enemies_pro"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/kenvector_future_thin"
+                android:text="5"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/white"
+                android:textSize="15dp" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
     <Button
         android:id="@+id/result_play_again"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Volver a jugar"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/kenvector_future_thin"
+        android:textSize="20dp"
         android:background="@drawable/button_blue"
         android:paddingHorizontal="20dp"
         />
@@ -43,6 +163,8 @@
         android:text="Volver al inicio"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="5dp"
+        android:fontFamily="@font/kenvector_future_thin"
+        android:textSize="20dp"
         android:background="@drawable/button_blue"
         android:paddingHorizontal="20dp"
         />
@@ -53,6 +175,8 @@
         android:text="Salir"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="5dp"
+        android:fontFamily="@font/kenvector_future_thin"
+        android:textSize="20dp"
         android:background="@drawable/button_blue"
         android:paddingHorizontal="20dp"
         />
