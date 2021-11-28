@@ -33,7 +33,7 @@ public class ResultFragment extends BaseFragment {
         e_m.setText(String.valueOf(Communicator.getE_mid()));
         e_p=rootView.findViewById(R.id.result_enemies_pro_data);
         e_p.setText(String.valueOf(Communicator.getE_pro()));
-        meteors=rootView.findViewById(R.id.result_enemies_pro_data);
+        meteors=rootView.findViewById(R.id.result_meteors_data);
         meteors.setText(String.valueOf(Communicator.getMeteors()));
 
         play_again.setOnClickListener(new View.OnClickListener() {

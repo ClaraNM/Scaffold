@@ -16,7 +16,7 @@ public class Bullet extends Sprite {
 
     public Bullet(GameEngine gameEngine){
         super(gameEngine, R.drawable.player_laser);
-
+        max=false;
         speedFactor = gameEngine.pixelFactor * -300d / 1000d;
     }
 
@@ -55,7 +55,7 @@ public class Bullet extends Sprite {
         if (otherObject instanceof Asteroid) {
             if (((Asteroid) otherObject).getLife()>0){
                 removeObject(gameEngine);
-                gameEngine.onGameEvent(GameEvent.AsteroidHit);
+                //gameEngine.onGameEvent(GameEvent.AsteroidHit);
             }else {
                 // Remove both from the game (and return them to their pools)
                 removeObject(gameEngine);
@@ -71,8 +71,8 @@ public class Bullet extends Sprite {
         }
         if(otherObject instanceof Enemy){
             if (((Enemy) otherObject).getLifes()>0){
-                removeObject(gameEngine);
-                gameEngine.onGameEvent(GameEvent.AsteroidHit);
+                this.removeObject(gameEngine);
+                //gameEngine.onGameEvent(GameEvent.AsteroidHit);
             }else {
                 // Remove both from the game (and return them to their pools)
                 removeObject(gameEngine);
@@ -83,7 +83,7 @@ public class Bullet extends Sprite {
                 if (e instanceof EnemyMid){Communicator.addE_mid();}
                 if (e instanceof EnemyHard){Communicator.addE_pro();}
                 e.removeObject(gameEngine);
-                gameEngine.onGameEvent(GameEvent.AsteroidHit);
+                gameEngine.onGameEvent(GameEvent.SpaceshipHit);
 
 
             }

@@ -9,7 +9,8 @@ import dadm.scaffold.sound.GameEvent;
 public class Asteroid extends Sprite {
 
     private final GameController gameController;
-    private int life=2;
+    private final int MAX_LIFE=2;
+    private int life=MAX_LIFE;
     private double speed;
     private double speedX;
     private double speedY;
@@ -20,6 +21,7 @@ public class Asteroid extends Sprite {
         super(gameEngine, R.drawable.meteor_tiny);
         this.speed = 200d * pixelFactor/1000d;
         this.gameController = gameController;
+        max=true;
     }
 
     public void init(GameEngine gameEngine) {
@@ -42,6 +44,7 @@ public class Asteroid extends Sprite {
     public void removeObject(GameEngine gameEngine) {
         // Return to the pool
         gameEngine.removeGameObject(this);
+        life=MAX_LIFE;
         gameController.returnToPool(this);
     }
 

@@ -25,7 +25,11 @@ public final class SoundManager {
 	public SoundManager(Context context) {
 		this.context = context;
 		loadSounds();
-		loadMusic();
+		try {
+			loadMusic(this.context.getAssets().openFd("sfx/skyfire_title_screen.ogg"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void loadEventSound(Context context, GameEvent event, String... filename) {
@@ -49,20 +53,21 @@ public final class SoundManager {
 	private void loadSounds() {
 		createSoundPool();
 		soundsMap = new HashMap<GameEvent, Integer>();
-		loadEventSound(context, GameEvent.AsteroidHit, "Asteroid_explosion_1.wav");
+		loadEventSound(context, GameEvent.AsteroidHit, "asteroid_explosion.wav");
 		loadEventSound(context, GameEvent.SpaceshipHit, "Spaceship_explosion.wav");
 		loadEventSound(context, GameEvent.LaserFired, "sfx_laser1.ogg");
 		loadEventSound(context, GameEvent.ShieldUp, "sfx_shieldUp.ogg");
 		loadEventSound(context, GameEvent.ShieldDown, "sfx_shieldDown.ogg");
+		loadEventSound(context, GameEvent.GetItem, "sfx_get_item_up.wav");
 		loadEventSound(context, GameEvent.Lose, "sfx_lose.ogg");
 
 	}
 
-	private void loadMusic() {
+	private void loadMusic(AssetFileDescriptor afd_) {
 		try {
 			// Important to not reuse it. It can be on a strange state
 			bgPlayer = new MediaPlayer();
-			AssetFileDescriptor afd = context.getAssets().openFd("sfx/Riccardo_Colombo_-_11_-_Something_mental.mp3");
+			AssetFileDescriptor afd = afd_;
 			bgPlayer.setDataSource(afd.getFileDescriptor(),
 					afd.getStartOffset(), afd.getLength());
 			bgPlayer.setLooping(true);
@@ -75,6 +80,11 @@ public final class SoundManager {
 		}
 	}
 
+	public void changeMusic(AssetFileDescriptor afd_){
+		unloadMusic();
+		loadMusic(afd_);
+
+	}
 	private void createSoundPool() {
 		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
 			soundPool = new SoundPool(MAX_STREAMS, AudioManager.STREAM_MUSIC, 0);

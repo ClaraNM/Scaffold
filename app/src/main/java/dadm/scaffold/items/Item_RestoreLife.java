@@ -14,7 +14,7 @@ public class Item_RestoreLife extends Sprite {
 
     public Item_RestoreLife(GameController gameController, GameEngine gameEngine) {
         super(gameEngine, R.drawable.pill_red);
-        this.speed = 50d * pixelFactor/1000d;
+        this.speed = 50d * pixelFactor/950d;
         this.gameController = gameController;
     }
 

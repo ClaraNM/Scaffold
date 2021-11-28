@@ -7,6 +7,7 @@ import dadm.scaffold.engine.GameEngine;
 import dadm.scaffold.engine.Sprite;
 
 public abstract class Enemy extends Sprite {
+    private int MAX_LIFES;
 private int lifes;
 private int points;
 private double speed;
@@ -21,6 +22,10 @@ private double speed;
     public Enemy(GameController gameController,GameEngine gameEngine, int drawableRes, int lifes, int points, double speed) {
         super(gameEngine, drawableRes);
         this.gameController=gameController;
+        this.MAX_LIFES=lifes;
+        this.lifes=MAX_LIFES;
+        this.points=points;
+        this.speed=speed;
     }
     void releaseBullet(EnemyBullet bullet) {
         bullets.add(bullet);
@@ -28,6 +33,7 @@ private double speed;
     public void removeObject(GameEngine gameEngine) {
         // Return to the pool
         gameEngine.removeGameObject(this);
+        this.setLifes(MAX_LIFES);
         gameController.returnEnemyToPool(this);
     }
 

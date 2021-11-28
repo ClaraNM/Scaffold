@@ -22,8 +22,8 @@ public class Shield extends Sprite {
     @Override
     public void startGame() {
         shield_position=shipPlayer.getShipPosition();
-        positionX=shield_position[0]-(shipPlayer.getShipWidth()/2);
-        positionY=shield_position[1]-(shipPlayer.getShipHeight()/2);
+        positionX=shield_position[0]-((shipPlayer.getShipWidth()/2)+5);
+        positionY=shield_position[1]-((shipPlayer.getShipHeight()/2)+50);
     }
 
     @Override
@@ -33,8 +33,8 @@ public class Shield extends Sprite {
     }
     private void updatePosition() {
         shield_position=shipPlayer.getShipPosition();
-        positionX=shield_position[0]-(shipPlayer.getShipWidth()/2);
-        positionY=shield_position[1]-(shipPlayer.getShipHeight()/2);
+        positionX=shield_position[0]-((shipPlayer.getShipWidth()/2)+5);
+        positionY=shield_position[1]-((shipPlayer.getShipHeight()/2)+50);
 
     }
     public void checkShieldTime(long elapsedMillis, GameEngine gameEngine){

@@ -6,5 +6,6 @@ public enum GameEvent {
     LaserFired,
     ShieldUp,
     ShieldDown,
+    GetItem,
     Lose
 }

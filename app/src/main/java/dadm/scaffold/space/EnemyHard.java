@@ -9,13 +9,14 @@ import dadm.scaffold.sound.GameEvent;
 public class EnemyHard extends Enemy{
 double speedX;
 double speedY;
+private int MAX_LIFES;
 GameController gameController;
     public EnemyHard(GameController gameController, GameEngine gameEngine) {
-        super(gameController, gameEngine, R.drawable.enemy_pro, 6,100,0);
+        super(gameController, gameEngine, R.drawable.enemy_pro, 10,100,0);
         this.setSpeed(pixelFactor * 100d / 2000d);
         this.initBulletPool(gameEngine);
         this.gameController = gameController;
-
+        this.MAX_LIFES=this.getLifes();
     }
 
     private void initBulletPool(GameEngine gameEngine) {
@@ -43,7 +44,7 @@ GameController gameController;
     public void init(GameEngine gameEngine) {
         // They initialize in a [-30, 30] degrees angle
         double angle = gameEngine.random.nextDouble()*Math.PI/3d-Math.PI/6d;
-        speedX = this.getSpeed() * Math.sin(angle);
+        speedX = this.getSpeed()*10 * Math.sin(angle);
         speedY = this.getSpeed() * Math.cos(angle);
         positionX = gameEngine.random.nextInt(gameEngine.width/2)+gameEngine.width/4;
         // They initialize outside of the screen vertically
@@ -56,6 +57,12 @@ GameController gameController;
         positionY += speedY * elapsedMillis;
         checkFiring(elapsedMillis, gameEngine);
         // Check of the sprite goes out of the screen and return it to the pool if so
+        if (positionX<width){
+            speedX=-speedX;
+
+        }else if(positionX>(gameEngine.width-width)){
+            speedX= -speedX;
+        }
         if (positionY > gameEngine.height) {
             // Return to the pool
             gameEngine.removeGameObject(this);
@@ -71,20 +78,37 @@ GameController gameController;
                 bullet.init(this, positionX + width/2, positionY+height);
                 gameEngine.addGameObject(bullet);
             this.setTimeSinceLastFire(0);
-            gameEngine.onGameEvent(GameEvent.LaserFired);
+          //  gameEngine.onGameEvent(GameEvent.LaserFired);
         }
         this.setTimeSinceLastFire(this.getTimeSinceLastFire()+elapsedMillis);
 
+    }
+    private void changeSprite(GameEngine gameEngine, int life){
+        if (life==(MAX_LIFES-1)){
+            this.updateSprite(gameEngine,R.drawable.enemy_pro_2);
+        }
+        if (life==(MAX_LIFES-3)){
+            this.updateSprite(gameEngine,R.drawable.enemy_pro_3);
+        }
+        if ((life==(MAX_LIFES-6))||(life==(MAX_LIFES-5))){
+            this.updateSprite(gameEngine,R.drawable.enemy_pro_4);
+        }
+        if (life==(MAX_LIFES-9)){
+            this.updateSprite(gameEngine,R.drawable.enemy_pro_5);
+        }
     }
     @Override
     public void onCollision(GameEngine gameEngine, ScreenGameObject otherObject) {
         if (otherObject instanceof Bullet) {
             int life=this.getLifes()-((Bullet) otherObject).getDAMAGE();
             this.setLifes(life);
+            changeSprite(gameEngine, this.getLifes());
         }
         if (otherObject instanceof BigBullet) {
             int life=this.getLifes()-((BigBullet) otherObject).getDAMAGE();
             this.setLifes(life);
+            changeSprite(gameEngine, this.getLifes());
+
         }
     }
 }

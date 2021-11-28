@@ -13,7 +13,7 @@ public class Item_RestoreAmmo extends Sprite {
 
     public Item_RestoreAmmo(GameController gameController, GameEngine gameEngine) {
         super(gameEngine, R.drawable.item_resote_ammo);
-        this.speed = 50d * pixelFactor/1000d;
+        this.speed = 50d * pixelFactor/900d;
         this.gameController = gameController;
     }
 

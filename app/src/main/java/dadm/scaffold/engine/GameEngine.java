@@ -2,6 +2,7 @@ package dadm.scaffold.engine;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.AssetFileDescriptor;
 import android.graphics.Rect;
 import android.util.Log;
 import android.view.View;
@@ -202,5 +203,8 @@ public class GameEngine {
         // We notify all the GameObjects
         // Also the sound manager
         soundManager.playSoundForGameEvent(gameEvent);
+    }
+    public void onMusicChange(AssetFileDescriptor afd){
+        soundManager.changeMusic(afd);
     }
 }

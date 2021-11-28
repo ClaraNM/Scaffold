@@ -36,9 +36,10 @@ public class SpaceShipPlayer extends Sprite {
 
     public SpaceShipPlayer(GameEngine gameEngine, int ship_ID){
         super(gameEngine, ship_ID);
-        speedFactor = pixelFactor * 100d / 1000d; // We want to move at 100px per second on a 400px tall screen
+        speedFactor = pixelFactor * 100d / 500d; // We want to move at 100px per second on a 400px tall screen
         maxX = gameEngine.width - width;
         maxY = gameEngine.height - height;
+        max=false;
         Communicator.setAmmo(ammo);
         Communicator.setLifes(this.lifes);
         initBulletPool(gameEngine);
@@ -206,6 +207,9 @@ public int getShipWidth(){
             lifes=MAX_LIFES;
             Item_RestoreLife i = (Item_RestoreLife) otherObject;
             i.removeObject(gameEngine);
+            Communicator.setLifes(lifes);
+            gameEngine.onGameEvent(GameEvent.GetItem);
+
         }
  //Colision con recuperar municion
     if (otherObject instanceof Item_RestoreAmmo){
@@ -213,12 +217,14 @@ public int getShipWidth(){
         Communicator.setAmmo(MAX_BIG_BULLET_AMMO);
         Item_RestoreAmmo i = (Item_RestoreAmmo) otherObject;
         i.removeObject(gameEngine);
+        gameEngine.onGameEvent(GameEvent.GetItem);
     }
  //Colision con item disparo doble
  if (otherObject instanceof Item_DoubleShoot){
      doubleShoot=true;
      Item_DoubleShoot i = (Item_DoubleShoot) otherObject;
      i.removeObject(gameEngine);
+     gameEngine.onGameEvent(GameEvent.GetItem);
  }
  //Colision con item escudo
         if (otherObject instanceof Item_Protection){

@@ -14,7 +14,7 @@ public class Item_DoubleShoot extends Sprite {
 
     public Item_DoubleShoot(GameController gameController, GameEngine gameEngine) {
         super(gameEngine, R.drawable.item_double_shoot);
-        this.speed = 50d * pixelFactor/1000d;
+        this.speed = 50d * pixelFactor/600d;
         this.gameController = gameController;
     }
 

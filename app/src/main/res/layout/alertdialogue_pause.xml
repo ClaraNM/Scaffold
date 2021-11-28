@@ -34,7 +34,7 @@
         android:fontFamily="@font/kenvector_future_thin"
         android:paddingHorizontal="20dp"
         android:text="Continuar"
-        android:textSize="25dp" />
+        android:textSize="20dp" />
 
     <Button
         android:id="@+id/pause_stop"
@@ -45,8 +45,8 @@
         android:background="@drawable/button_red"
         android:fontFamily="@font/kenvector_future_thin"
         android:paddingHorizontal="20dp"
-        android:textSize="25dp"
-        android:text="Salir" />
+        android:text="Salir"
+        android:textSize="20dp" />
 </RelativeLayout>
 </LinearLayout>
 </android.support.constraint.ConstraintLayout>

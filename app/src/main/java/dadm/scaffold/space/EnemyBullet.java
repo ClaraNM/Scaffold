@@ -17,6 +17,7 @@ public class EnemyBullet extends Sprite {
     public EnemyBullet(GameEngine gameEngine) {
         super(gameEngine, R.drawable.enemy_laser);
         speedFactor = gameEngine.pixelFactor * 100d / 1000d;
+        max=false;
 
     }
 

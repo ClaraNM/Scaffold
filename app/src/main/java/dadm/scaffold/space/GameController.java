@@ -18,10 +18,10 @@ public class GameController extends GameObject {
 
     private static final int TIME_BETWEEN_ASTEROIDS = 500;
     private static final int TIME_BETWEEN_ENEMIES = 5000;
-    private static final int TIME_BETWEEN_RESTORE_ITEMS = 20000;
-    private static final int TIME_BETWEEN_AMMO_ITEMS = 25000;
-    private static final int TIME_BETWEEN_DOUBLESHOOT_ITEMS = 100000;
-    private static final int TIME_BETWEEN_SHIELD_ITEMS = 50000;
+    private static final int TIME_BETWEEN_RESTORE_ITEMS = 10000;
+    private static final int TIME_BETWEEN_AMMO_ITEMS = 15000;
+    private static final int TIME_BETWEEN_DOUBLESHOOT_ITEMS = 40000;
+    private static final int TIME_BETWEEN_SHIELD_ITEMS = 30000;
 
 
 

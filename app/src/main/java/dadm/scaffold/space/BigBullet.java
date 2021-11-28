@@ -16,6 +16,7 @@ public class BigBullet extends Sprite {
     public BigBullet(GameEngine gameEngine) {
         super(gameEngine, R.drawable.player_big_laser);
         speedFactor = gameEngine.pixelFactor * -500d / 1000d;
+        max=true;
     }
 
     @Override

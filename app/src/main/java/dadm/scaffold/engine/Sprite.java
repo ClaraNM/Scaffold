@@ -12,7 +12,7 @@ import android.graphics.drawable.Drawable;
 
 
 public abstract class Sprite extends ScreenGameObject {
-
+protected boolean max;
     Paint mPaint;
     protected double rotation;
 
@@ -28,12 +28,19 @@ public abstract class Sprite extends ScreenGameObject {
         this.mPaint=new Paint();
         this.pixelFactor = gameEngine.pixelFactor;
 
+        this.max=false;
         this.width = (int) (spriteDrawable.getIntrinsicWidth() * this.pixelFactor);
         this.height = (int) (spriteDrawable.getIntrinsicHeight() * this.pixelFactor);
 
         this.bitmap = ((BitmapDrawable) spriteDrawable).getBitmap();
 
-        radius = Math.min(height, width)/2;
+        //Coge la colision mínima o la máxima segun el objeto
+        if (max==true){
+            radius = Math.max(height, width)/2;
+
+        }else {
+            radius = Math.min(height, width)/2;
+        }
     }
 
     @Override
@@ -48,11 +55,11 @@ public abstract class Sprite extends ScreenGameObject {
         //Pintar colisiones
         mPaint.setColor(Color.YELLOW);
         mPaint.setAlpha(50);
-        canvas.drawCircle(
+       /* canvas.drawCircle(
                 (int) (positionX + width / 2),
                 (int) (positionY + height / 2),
                 (int) radius,
-                mPaint);
+                mPaint);*/
         matrix.reset();
         matrix.postScale((float) pixelFactor, (float) pixelFactor);
         matrix.postTranslate((float) positionX, (float) positionY);
@@ -71,6 +78,11 @@ public abstract class Sprite extends ScreenGameObject {
 
         this.bitmap = ((BitmapDrawable) spriteDrawable).getBitmap();
 
-        radius = Math.min(height, width)/2;
+        if (max==true){
+            radius = Math.max(height, width)/2;
+
+        }else {
+            radius = Math.min(height, width)/2;
+        }
     }
 }

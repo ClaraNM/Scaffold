@@ -12,7 +12,7 @@ public class Item_Protection extends Sprite {
     private double speedY;
     public Item_Protection(GameController gameController, GameEngine gameEngine) {
         super(gameEngine, R.drawable.shield_silver);
-        this.speed = 50d * pixelFactor/1000d;
+        this.speed = 50d * pixelFactor/800d;
         this.gameController = gameController;
     }
 
